@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: FallDetection
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":-3.0,"y":38.0},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{"target":null},"position":{"x":-333.0,"y":-91.0},"guid":"d903e86c-570d-422d-a0c8-9a869179b307","$version":"A","$type":"Unity.VisualScripting.OnCollisionEnter"},{"chainable":false,"parameterNames":["newX","newY"],"member":{"name":"Set","parameterTypes":["System.Single","System.Single"],"targetType":"UnityEngine.Vector2","targetTypeName":"UnityEngine.Vector2","$version":"A"},"defaultValues":{"target":{"x":0.0,"y":0.0,"$type":"UnityEngine.Vector2"},"%newX":{"$content":0.0,"$type":"System.Single"},"%newY":{"$content":0.0,"$type":"System.Single"}},"position":{"x":2.0,"y":-91.0},"guid":"c45249bf-343e-47b5-beb1-6206800ccbf4","$version":"A","$type":"Unity.VisualScripting.InvokeMember"},{"type":"UnityEngine.GameObject","value":null,"defaultValues":{},"position":{"x":215.0,"y":-40.0},"guid":"48b3e2ea-a250-428e-b00f-579231b21643","$version":"A","$type":"Unity.VisualScripting.Literal"}],"$version":"A"}}'
+    _objectReferences: []
