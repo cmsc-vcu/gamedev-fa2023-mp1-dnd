@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
     private float speed = 15f;
-    private float jumpingPower = 20f;
+    private float jumpingPower = 45f;
     private bool isFacingRight = true;
+    private bool jumping = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -19,27 +21,42 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !jumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            jumping = true;
+            rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
+        }
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f && jumping)
+        {
+
+            rb.AddForce(Vector2.down * 20f, ForceMode2D.Impulse);
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
 
         Flip();
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        float HtargetSpeed = horizontal * speed;
+        float HspeedDiff = HtargetSpeed - rb.velocity.x;
+        float HaccelRate = (Mathf.Abs(HtargetSpeed) > 0.01f) ? 2 : 2;
+
+        // Mathf.Sign(speedDiff) Preserves Movement speed
+        float Hmovement = Mathf.Pow(Mathf.Abs(HspeedDiff) * HaccelRate, 2) * Mathf.Sign(HspeedDiff);
+
+        // Apply Force
+        rb.AddForce(Hmovement * Vector2.right);
     }
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        if (Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer))
+        {
+            jumping = false;
+            return true;
+        }
+        return false;
     }
 
     private void Flip()
